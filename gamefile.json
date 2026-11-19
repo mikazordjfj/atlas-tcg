@@ -1,59 +1,258 @@
 {
-  "name": "Atlas TCG - Prototipo",
-  "customHelp": "Prototipo do Atlas TCG. O pagamento de custos exige descarte de cartas no momento da jogada. Os scripts completos ainda nao estao conectados ao jogo.",
+  "name": "Atlas TCG - Prototipo v0.2",
+  "customHelp": "ATLAS TCG (protótipo). Mana: escolha uma carta em Preparação e mova da mão para Pagamento uma carta por mana. Clique em Pagar custo e jogar carta. As cores pagam as mesmas cores; +N aceita N cartas quaisquer. Sistema ainda experimental; combate completo e efeitos individuais não automatizados.",
+  "scriptsUrls": [
+    "https://mikazordjfj.github.io/atlas-tcg/scripts/atlas.js"
+  ],
   "deckBuilding": {
-    "mainFilters": ["type", "cost"],
-    "formats": [{"title": "Atlas - Testes", "gameplay": "Atlas"}]
+    "mainFilters": [
+      "type",
+      "cost",
+      "color"
+    ],
+    "formats": [
+      {
+        "title": "Atlas - Laboratorio (sem limite de deck)",
+        "gameplay": "Atlas"
+      }
+    ]
   },
   "gameplay": {
     "Atlas": {
-      "mulligan": {"startingHandSize": 5},
-      "newTurn": {"drawPerTurn": 1},
+      "mulligan": {
+        "startingHandSize": 5,
+        "mulliganCount": {
+          "max": 0
+        }
+      },
+      "newTurn": {
+        "drawOnStart": true,
+        "drawPerTurn": 1
+      },
       "countersStartingValues": [],
       "sections": {
         "layout": {
           "direction": "column",
           "content": [
-            {"direction": "row", "content": [
-              {"section": "Reino"}, {"section": "Comandante"}, {"section": "Gemas"}
-            ]},
-            {"section": "CampoDeBatalha"},
-            {"direction": "row", "content": [
-              {"section": "Construcoes"}, {"section": "Banco"}
-            ]},
-            {"direction": "row", "content": [
-              {"section": "Deck"}, {"section": "Discard"}, {"section": "ControlesAtlas"}
-            ]}
+            {
+              "direction": "row",
+              "content": [
+                {
+                  "section": "Reino"
+                },
+                {
+                  "section": "Comandante"
+                },
+                {
+                  "section": "Gemas"
+                }
+              ]
+            },
+            {
+              "section": "CampoDeBatalha"
+            },
+            {
+              "direction": "row",
+              "content": [
+                {
+                  "section": "Construcoes"
+                },
+                {
+                  "section": "Banco"
+                }
+              ]
+            },
+            {
+              "direction": "row",
+              "content": [
+                {
+                  "section": "Preparacao"
+                },
+                {
+                  "section": "Pagamento"
+                }
+              ]
+            },
+            {
+              "direction": "row",
+              "content": [
+                {
+                  "section": "Deck"
+                },
+                {
+                  "section": "Discard"
+                }
+              ]
+            },
+            {
+              "section": "ControlesAtlas"
+            }
           ]
         },
         "sectionsDict": {
-          "Reino": {"isHidden": "no", "height": "SMALL", "alignment": "CENTER"},
-          "Comandante": {"isHidden": "no", "height": "SMALL", "alignment": "CENTER"},
-          "Gemas": {"isHidden": "no", "height": "SMALL", "alignment": "CENTER"},
-          "CampoDeBatalha": {"isHidden": "no", "height": "MEDIUM", "alignment": "CENTER"},
-          "Construcoes": {"isHidden": "no", "height": "MEDIUM", "alignment": "CENTER"},
-          "Banco": {"isHidden": "no", "height": "MEDIUM", "alignment": "CENTER"},
-          "Deck": {"isHidden": "yes", "height": "SMALL", "alignment": "CENTER"},
-          "Discard": {"isHidden": "no", "height": "SMALL", "alignment": "CENTER"},
+          "Reino": {
+            "isHidden": "no",
+            "height": "SMALL",
+            "alignment": "CENTER",
+            "displayedTitle": "Reino"
+          },
+          "Comandante": {
+            "isHidden": "no",
+            "height": "SMALL",
+            "alignment": "CENTER",
+            "displayedTitle": "Comandante"
+          },
+          "Gemas": {
+            "isHidden": "no",
+            "height": "SMALL",
+            "alignment": "CENTER",
+            "displayedTitle": "Área de Gemas"
+          },
+          "CampoDeBatalha": {
+            "isHidden": "no",
+            "height": "MEDIUM",
+            "alignment": "CENTER",
+            "displayedTitle": "Campo de Batalha (4 unidades)"
+          },
+          "Construcoes": {
+            "isHidden": "no",
+            "height": "MEDIUM",
+            "alignment": "CENTER",
+            "displayedTitle": "Construções"
+          },
+          "Banco": {
+            "isHidden": "no",
+            "height": "MEDIUM",
+            "alignment": "CENTER",
+            "displayedTitle": "Banco"
+          },
+          "Preparacao": {
+            "isHidden": "no",
+            "height": "SMALL",
+            "alignment": "CENTER",
+            "displayedTitle": "Carta a jogar — pagamento",
+            "noAutoPayTo": true
+          },
+          "Pagamento": {
+            "isHidden": "no",
+            "height": "SMALL",
+            "alignment": "CENTER",
+            "displayedTitle": "Descarte para pagar — selecionar da mão",
+            "noAutoPayTo": true
+          },
+          "Discard": {
+            "isHidden": "no",
+            "height": "SMALL",
+            "alignment": "DECK",
+            "displayedTitle": "Descarte"
+          },
+          "Deck": {
+            "isHidden": "yes",
+            "height": "SMALL",
+            "alignment": "DECK",
+            "displayedTitle": "Baralho"
+          },
           "ControlesAtlas": {
             "type": "custom",
-            "defaultValue": {"rodada": 1, "status": "Prototipo"},
+            "defaultValue": {
+              "resultado": "Escolha uma carta e pague com descarte.",
+              "rodada": 0,
+              "velocidadeA": 1,
+              "velocidadeB": 1,
+              "dano": 0,
+              "defesa": 0
+            },
             "blueprint": {
               "type": "div",
+              "props": {
+                "style": {
+                  "padding": "8px",
+                  "background": "#16243b",
+                  "color": "#f7f9ff",
+                  "borderRadius": "8px"
+                }
+              },
               "children": [
-                {"type": "div", "children": "Atlas TCG - {{ game.data.ControlesAtlas.status }}"},
-                {"type": "button", "children": "Comprar 1 carta", "onClick": "await functions.draw(1)"},
-                {"type": "div", "children": "Rodada: {{ game.data.ControlesAtlas.rodada }}"},
-                {"type": "button", "children": "Proxima rodada (manual)", "onClick": "game.data.ControlesAtlas.rodada += 1"}
+                {
+                  "type": "div",
+                  "children": "ATLAS TCG • controles de teste"
+                },
+                {
+                  "type": "div",
+                  "children": "Pagamento: arraste uma carta da mão para Preparação; arraste da mão as cartas usadas como mana para Pagamento."
+                },
+                {
+                  "type": "button",
+                  "children": "Pagar custo e jogar carta",
+                  "onClick": "await atlasPagarEJogar()"
+                },
+                {
+                  "type": "button",
+                  "children": "Cancelar pagamento (voltar à mão)",
+                  "onClick": "await atlasCancelarPagamento()"
+                },
+                {
+                  "type": "div",
+                  "children": "{{ game.data.ControlesAtlas.resultado }}"
+                },
+                {
+                  "type": "button",
+                  "children": "Comprar 1 carta (teste)",
+                  "onClick": "await functions.draw(1)"
+                },
+                {
+                  "type": "div",
+                  "children": "Rodada do controle local: {{ game.data.ControlesAtlas.rodada }}"
+                },
+                {
+                  "type": "button",
+                  "children": "Iniciar nova rodada (controle)",
+                  "onClick": "game.data.ControlesAtlas.rodada += 1"
+                },
+                {
+                  "type": "div",
+                  "children": "Calculadora de combate: digite o dano bruto e use o botão de defesa."
+                },
+                {
+                  "type": "input-number",
+                  "props": {
+                    "value": "{{ game.data.ControlesAtlas.dano }}",
+                    "min": 0
+                  },
+                  "onChange": "game.data.ControlesAtlas.dano = Math.max(0, Number(value)||0)"
+                },
+                {
+                  "type": "button",
+                  "children": "Defender: dano recebido = teto(metade)",
+                  "onClick": "atlasCalcularDefesa()"
+                },
+                {
+                  "type": "div",
+                  "children": "Dano após defesa: {{ game.data.ControlesAtlas.defesa }}"
+                },
+                {
+                  "type": "div",
+                  "children": "Lembrete: quem defende perde sua ação na rodada; ordem por velocidade decrescente."
+                }
               ]
             }
           }
+        },
+        "autoPlayFromHand": {
+          "Unidade": "Preparacao",
+          "Construcao": "Preparacao",
+          "Magia": "Preparacao",
+          "Equipamento": "Preparacao"
+        },
+        "autoPlayFromStack": {
+          "Magia": "Discard"
         }
       }
     }
   },
   "cards": {
-    "dataUrl": "https://SEU-USUARIO.github.io/atlas-tcg/cards.json",
-    "cardBack": "https://SEU-USUARIO.github.io/atlas-tcg/assets/verso.png"
+    "dataUrl": "https://mikazordjfj.github.io/atlas-tcg/cards.json",
+    "cardBack": "https://mikazordjfj.github.io/atlas-tcg/assets/verso.png",
+    "cardBackColor": "#152b46"
   }
 }
