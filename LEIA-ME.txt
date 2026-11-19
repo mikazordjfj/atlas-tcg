@@ -1,0 +1,17 @@
+ATLAS TCG v0.2 — PRIMEIRA INTEGRAÇÃO REAL
+
+1. Abra https://github.com/mikazordjfj/atlas-tcg
+2. Em Add file > Upload files, envie TODOS os arquivos e pastas desta pasta (NÃO envie só o ZIP).
+3. Se o GitHub perguntar sobre substituir arquivos existentes, confirme Commit changes.
+4. Confira https://mikazordjfj.github.io/atlas-tcg/gamefile.json e /cards.json.
+5. No TCG Arena, remova a versão anterior caso esteja cadastrada e adicione a URL do gamefile.json.
+
+TESTE: crie um deck com cartas de teste; dentro da partida, arraste uma carta da mão para Preparacao e cartas de pagamento para Pagamento. Clique no botão 'Pagar custo e jogar carta'.
+
+IMPORTANTE: Scripts do TCG Arena só modificam cartas próprias. Esta versão NÃO implementa combate completo, troca com contadores, efeitos de construções, início de partida automático com comandante/reino, nem vigilância contra jogadas manuais incorretas. Essas integrações requerem desenvolvimento adicional e testes reais.
+
+As cartas do pacote são PLACEHOLDERS e não equivalem às artes finais. A carta vermelha usa temporariamente arte azul. O deck de 60 cartas ainda precisa das cartas oficiais.
+
+Esta versão deixa a fase de preparação por três rodadas e outras regras ainda não confirmadas sem automação — não inventa comportamento.
+
+Se houver erro no TCGA, envie uma captura da tela e do console (F12), ocultando informações pessoais.
