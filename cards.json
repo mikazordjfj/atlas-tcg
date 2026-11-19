@@ -1,0 +1,14 @@
+{
+  "atlas_teste_azul": {
+    "id": "atlas_teste_azul",
+    "face": {"front": {"name": {"name": "Unidade Azul (EXEMPLO)"}, "type": "Unidade", "cost": 1, "image": "https://SEU-USUARIO.github.io/atlas-tcg/assets/carta-teste-azul.png"}},
+    "name": "Unidade Azul (EXEMPLO)", "type": "Unidade", "cost": 1,
+    "atlas": {"cor": "azul", "custo": {"coloridas": {"azul": 1}, "generica": 0}, "velocidade": 2, "dano": 1, "vida": 3}
+  },
+  "atlas_teste_construcao": {
+    "id": "atlas_teste_construcao",
+    "face": {"front": {"name": {"name": "Construcao (EXEMPLO)"}, "type": "Construcao", "cost": 2, "image": "https://SEU-USUARIO.github.io/atlas-tcg/assets/carta-teste-construcao.png"}},
+    "name": "Construcao (EXEMPLO)", "type": "Construcao", "cost": 2,
+    "atlas": {"cor": "azul", "custo": {"coloridas": {}, "generica": 2}, "efeito": "A definir"}
+  }
+}

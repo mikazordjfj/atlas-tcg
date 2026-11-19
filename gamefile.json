@@ -1,0 +1,59 @@
+{
+  "name": "Atlas TCG - Prototipo",
+  "customHelp": "Prototipo do Atlas TCG. O pagamento de custos exige descarte de cartas no momento da jogada. Os scripts completos ainda nao estao conectados ao jogo.",
+  "deckBuilding": {
+    "mainFilters": ["type", "cost"],
+    "formats": [{"title": "Atlas - Testes", "gameplay": "Atlas"}]
+  },
+  "gameplay": {
+    "Atlas": {
+      "mulligan": {"startingHandSize": 5},
+      "newTurn": {"drawPerTurn": 1},
+      "countersStartingValues": [],
+      "sections": {
+        "layout": {
+          "direction": "column",
+          "content": [
+            {"direction": "row", "content": [
+              {"section": "Reino"}, {"section": "Comandante"}, {"section": "Gemas"}
+            ]},
+            {"section": "CampoDeBatalha"},
+            {"direction": "row", "content": [
+              {"section": "Construcoes"}, {"section": "Banco"}
+            ]},
+            {"direction": "row", "content": [
+              {"section": "Deck"}, {"section": "Discard"}, {"section": "ControlesAtlas"}
+            ]}
+          ]
+        },
+        "sectionsDict": {
+          "Reino": {"isHidden": "no", "height": "SMALL", "alignment": "CENTER"},
+          "Comandante": {"isHidden": "no", "height": "SMALL", "alignment": "CENTER"},
+          "Gemas": {"isHidden": "no", "height": "SMALL", "alignment": "CENTER"},
+          "CampoDeBatalha": {"isHidden": "no", "height": "MEDIUM", "alignment": "CENTER"},
+          "Construcoes": {"isHidden": "no", "height": "MEDIUM", "alignment": "CENTER"},
+          "Banco": {"isHidden": "no", "height": "MEDIUM", "alignment": "CENTER"},
+          "Deck": {"isHidden": "yes", "height": "SMALL", "alignment": "CENTER"},
+          "Discard": {"isHidden": "no", "height": "SMALL", "alignment": "CENTER"},
+          "ControlesAtlas": {
+            "type": "custom",
+            "defaultValue": {"rodada": 1, "status": "Prototipo"},
+            "blueprint": {
+              "type": "div",
+              "children": [
+                {"type": "div", "children": "Atlas TCG - {{ game.data.ControlesAtlas.status }}"},
+                {"type": "button", "children": "Comprar 1 carta", "onClick": "await functions.draw(1)"},
+                {"type": "div", "children": "Rodada: {{ game.data.ControlesAtlas.rodada }}"},
+                {"type": "button", "children": "Proxima rodada (manual)", "onClick": "game.data.ControlesAtlas.rodada += 1"}
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "cards": {
+    "dataUrl": "https://SEU-USUARIO.github.io/atlas-tcg/cards.json",
+    "cardBack": "https://SEU-USUARIO.github.io/atlas-tcg/assets/verso.png"
+  }
+}
