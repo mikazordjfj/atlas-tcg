@@ -1,0 +1,13 @@
+{
+  "author": "Mikazord",
+  "gameUrl": "https://mikazordjfj.github.io/atlas-tcg/gamefile.json",
+  "tags": "tcg,fantasia,estrategia,atlas",
+  "langs": [
+    "pt-BR"
+  ],
+  "useAiArts": true,
+  "descriptionUrl": "https://mikazordjfj.github.io/atlas-tcg/descricao.md",
+  "updates": [
+    "Protótipo 0.2: tabuleiro, cartas de teste e pagamento por descarte."
+  ]
+}
